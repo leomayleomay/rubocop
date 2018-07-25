@@ -173,8 +173,6 @@ end
 
 describe RuboCop::ResultCache, :isolated_environment do
   let(:config_store) { double('config_store') }
-  let(:tmpdir) { File.realpath(Dir.tmpdir) }
-  let(:puid) { Process.uid.to_s }
 
   describe 'the cache path when using a temp directory' do
     before do
@@ -184,7 +182,7 @@ describe RuboCop::ResultCache, :isolated_environment do
     end
     it 'contains the process uid' do
       cacheroot = RuboCop::ResultCache.cache_root(config_store)
-      expect(cacheroot).to eq(File.join(tmpdir, puid, 'rubocop_cache'))
+      expect(cacheroot).to eq(File.join('/tmp/rubocop_cache'))
     end
   end
 end
